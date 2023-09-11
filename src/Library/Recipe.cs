@@ -11,7 +11,7 @@ namespace Full_GRASP_And_SOLID.Library
 {
     public class Recipe
     {
-        private ArrayList steps = new ArrayList();
+        public ArrayList steps = new ArrayList();
 
         public Product FinalProduct { get; set; }
 
@@ -25,14 +25,19 @@ namespace Full_GRASP_And_SOLID.Library
             this.steps.Remove(step);
         }
 
-        public void PrintRecipe()
+    }
+
+    public class ConsolePrinter
+    {
+         public static void PrintRecipe(Recipe recipe)
         {
-            Console.WriteLine($"Receta de {this.FinalProduct.Description}:");
-            foreach (Step step in this.steps)
+            Console.WriteLine($"Receta de {recipe.FinalProduct.Description}:");
+            foreach (Step step in recipe.steps)
             {
                 Console.WriteLine($"{step.Quantity} de '{step.Input.Description}' " +
                     $"usando '{step.Equipment.Description}' durante {step.Time}");
             }
         }
     }
+    //Para implementar este cambio uso el principio SRP. No puede ser que la clase de receta tenga 2 responsabilidaes diferentes.
 }
